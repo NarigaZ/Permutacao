@@ -1,7 +1,10 @@
+import java.util.Arrays;
+
 public class Palavra {
-    private String palavra;
-    private char[] letras = null;
-    private int nLetras , letrasRep,permutacoes , fat;
+    private String palavra , palavra2 , np , np2;
+    private char[] letras = null , letras2 = null;
+    int aux2=1;
+
     public String getPalavra() {
         return palavra;
     }
@@ -11,18 +14,11 @@ public class Palavra {
         letras = palavra.toCharArray();
     }
 
-    public int letrasRep (){
-        int cont=0;
-        for (int i=0 ; i<letras.length ; i++){
-            for (int j=i+1 ; j<letras.length ; j++) {
-                if (letras[i] == letras[j]){
-                    cont++;
-                }
-            }
-        }
-        letrasRep=cont;
-        return letrasRep;
+    public void setPalavra2(String palavra2) {
+        this.palavra2 = palavra2;
+        letras2 = palavra2.toCharArray();
     }
+
 
     public int tamanho(){
         return letras.length;
@@ -35,10 +31,14 @@ public class Palavra {
             return Fatorial(num-1)*num;
         }
     }
+    public void zerarAux (){
+        aux2 = 1;
+    }
 
     public void imprimeAnagramas(String prefix, String word) {
         if (word.length() <= 1) {
-            System.out.println(prefix + word);
+            System.out.println("[" + aux2 + "]" + prefix + word);
+            aux2++;
         } else {
             for (int i = 0; i < word.length(); i++) {
                 String cur = word.substring(i, i + 1);
@@ -47,6 +47,26 @@ public class Palavra {
                 imprimeAnagramas(prefix + cur, before + after);
             }
         }
+    }
+
+    public boolean anagrama (){
+        if (letras.length != letras2.length){
+            return false;
+        } else {
+            Arrays.sort(letras);
+            Arrays.sort(letras2);
+            np = new String(letras);
+            np2 = new String(letras2);
+            if (np.equalsIgnoreCase(np2)){
+                return true;
+            }else {
+                return false;
+            }
+        }
+    }
+
+    public void limpaTela (){
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
 }
